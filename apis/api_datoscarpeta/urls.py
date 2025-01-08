@@ -2,11 +2,11 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .views.AduanaDespachoView import AduanaDespachoView
-from .views.CanalAperturaView import CanalAperturaListView
-from .views.ClasficacionCarpetaView import ClasificacionCarpetaList
+from .views.CanalAperturaView import CanalAperturaView
+from .views.ClasficacionCarpetaView import ClasificacionCarpetaView
 from .views.ImportadorView import ImportadorView
 from .views.MercaderiaView import MercaderiaView
-from .views.ModalidadDespachoView import ModalidadDespachoList
+from .views.ModalidadDespachoView import ModalidadDespachoView
 from .views.PersonalAgenciaView import PersonalAgenciaView
 from .views.TipoArchivoView import TipoArchivoView
 
@@ -16,10 +16,10 @@ router.register(
     r'recinto-aduanero', AduanaDespachoView, basename='recinto_aduanero'
 )
 router.register(
-    r'canal-apertura', CanalAperturaListView, basename='canal_apertura'
+    r'canal-apertura', CanalAperturaView, basename='canal_apertura'
 )
 router.register(
-    r'clasificacion-carpeta', ClasificacionCarpetaList,
+    r'clasificacion-carpeta', ClasificacionCarpetaView,
     basename='clasificacion_carpeta'
 )
 router.register(
@@ -29,7 +29,7 @@ router.register(
     r'mercaderia', MercaderiaView, basename='mercaderia'
 )
 router.register(
-    r'modalidad-despacho', ModalidadDespachoList,
+    r'modalidad-despacho', ModalidadDespachoView,
     basename='modalidad_despacho'
 )
 router.register(
