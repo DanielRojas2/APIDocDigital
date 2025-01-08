@@ -1,7 +1,7 @@
-from rest_framework import generics
+from rest_framework import viewsets
 from ..models.ModeloModalidadDespacho import ModeloModalidadDespacho
 from ..serializers.ModalidadDespachoSerializer import ModalidadDespachoSerializer
 
-class ModalidadDespachoList(generics.ListAPIView):
+class ModalidadDespachoList(viewsets.ReadOnlyModelViewSet):
     queryset = ModeloModalidadDespacho.objects.all()
     serializer_class = ModalidadDespachoSerializer
