@@ -16,10 +16,21 @@ router.register(
     r'recinto-aduanero', AduanaDespachoView, basename='recinto_aduanero'
 )
 router.register(
+    r'canal-apertura', CanalAperturaListView, basename='canal_apertura'
+)
+router.register(
+    r'clasificacion-carpeta', ClasificacionCarpetaList,
+    basename='clasificacion_carpeta'
+)
+router.register(
     r'importador', ImportadorView, basename='importador'
 )
 router.register(
     r'mercaderia', MercaderiaView, basename='mercaderia'
+)
+router.register(
+    r'modalidad-despacho', ModalidadDespachoList,
+    basename='modalidad_despacho'
 )
 router.register(
     r'personal-agencia', PersonalAgenciaView, basename='personal-agencia'
@@ -28,17 +39,4 @@ router.register(
     r'tipo-archivo', TipoArchivoView, basename='tipo-archivo'
 )
 
-urlpatterns = [
-    path(
-        'canal-apertura/', CanalAperturaListView.as_view(),
-        name='canal_apertura',
-    ),
-    path(
-        'clasificacion-carpetas/', ClasificacionCarpetaList.as_view(),
-        name='clasificacion_carpetas'
-    ),
-    path(
-        'modalidad-despacho/', ModalidadDespachoList.as_view(),
-        name='modalidad_despacho'
-    ),
-]+router.urls
+urlpatterns = router.urls
