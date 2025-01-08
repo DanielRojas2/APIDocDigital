@@ -4,4 +4,4 @@ from ..models.ModeloClasificacionCarpeta import ModeloClasificacionCarpeta
 class ClasificacionCarpetaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ModeloClasificacionCarpeta
-        fields = '__all__'
+        fields = ['id', 'clasificacion_carpeta']

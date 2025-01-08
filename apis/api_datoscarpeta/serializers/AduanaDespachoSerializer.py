@@ -4,4 +4,4 @@ from ..models.ModeloAduanaDespacho import ModeloAduanaDespacho
 class AduanaDespachoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ModeloAduanaDespacho
-        fields = '__all__'
+        fields = ['id', 'aduana_despacho']

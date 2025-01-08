@@ -4,4 +4,4 @@ from ..models.ModeloMercaderia import ModeloMercaderia
 class MercaderiaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ModeloMercaderia
-        fields = '__all__'
+        fields = ['id', 'nombre_mercaderia']

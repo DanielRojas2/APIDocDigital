@@ -4,4 +4,9 @@ from ..models.ModeloImportador import ModeloImportador
 class ImportadorSerializer(serializers.ModelSerializer):
     class Meta:
         model = ModeloImportador
-        fields = '__all__'
+        fields = [
+            'id',
+            'nombre_importador',
+            'nit_importador',
+            'tipo_importador'
+        ]
