@@ -44,9 +44,9 @@ class ModeloCarpeta(models.Model):
     class Meta:
         verbose_name = 'Carpeta'
         verbose_name_plural = 'Carpetas'
-        ordering = ['creado']
+        ordering = ['fecha_apertura']
         indexes = [
-            models.Index(fields=['creado'])
+            models.Index(fields=['fecha_apertura'])
         ]
 
     def __str__(self):
