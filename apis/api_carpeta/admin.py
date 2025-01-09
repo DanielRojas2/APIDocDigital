@@ -43,5 +43,5 @@ class PersonalCarpeta(admin.ModelAdmin):
 
 @admin.register(ModeloTipoArchivoCarpeta)
 class TipoArchivoCarpeta(admin.ModelAdmin):
-    list_display = ['carpeta', 'tipo_archivo']
+    list_display = ['carpeta']
     list_filter = ['carpeta']
