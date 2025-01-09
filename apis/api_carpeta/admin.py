@@ -22,7 +22,7 @@ class CarpetaAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha_apertura'
 
 @admin.register(ModeloDocumentoSoporte)
-class DocumentoSoporte(admin.ModelAdmin):
+class DocumentoSoporteAdmin(admin.ModelAdmin):
     list_display = [
         'carpeta_tipoarchivo',
         'codigo_referencia',
@@ -33,7 +33,7 @@ class DocumentoSoporte(admin.ModelAdmin):
     list_filter = ['estado_archivo', 'estado_respaldo']
 
 @admin.register(ModeloPersonalCarpeta)
-class PersonalCarpeta(admin.ModelAdmin):
+class PersonalCarpetaAdmin(admin.ModelAdmin):
     list_display = [
         'personal_asignado',
         'carpeta_asignada',
@@ -42,6 +42,6 @@ class PersonalCarpeta(admin.ModelAdmin):
     list_filter = ['rol_asignado']
 
 @admin.register(ModeloTipoArchivoCarpeta)
-class TipoArchivoCarpeta(admin.ModelAdmin):
+class TipoArchivoCarpetaAdmin(admin.ModelAdmin):
     list_display = ['carpeta']
     list_filter = ['carpeta']
