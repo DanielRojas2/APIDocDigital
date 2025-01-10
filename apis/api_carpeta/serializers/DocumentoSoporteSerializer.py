@@ -5,6 +5,7 @@ class DocumentoSoporteSerializer(serializers.ModelSerializer):
     class Meta:
         model = ModeloDocumentoSoporte
         fields = [
+            'id',
             'carpeta_tipoarchivo',
             'codigo_referencia',
             'respaldo',
