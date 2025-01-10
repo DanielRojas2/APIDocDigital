@@ -29,6 +29,7 @@ BASE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [
@@ -38,7 +39,6 @@ LOCAL_APPS = [
 ]
 
 THIRD_APPS = [
-    'django_extensions',
     'corsheaders',
     'rest_framework_simplejwt',
     'rest_framework',
