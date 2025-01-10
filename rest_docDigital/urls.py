@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-datoscarpeta/', include('apis.api_datoscarpeta.urls')),
     path('api-carpeta/', include('apis.api_carpeta.urls')),
+    path('api-auth/', include('apis.api_auth.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
