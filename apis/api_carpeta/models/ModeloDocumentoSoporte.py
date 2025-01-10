@@ -23,7 +23,8 @@ class ModeloDocumentoSoporte(models.Model):
     )
 
     carpeta_tipoarchivo = models.OneToOneField(
-        ModeloTipoArchivoCarpeta, on_delete=models.CASCADE, blank=False, null=False
+        ModeloTipoArchivoCarpeta, on_delete=models.CASCADE, blank=False, null=False,
+        related_name='documento_soporte'
     )
     codigo_referencia = models.CharField(
         max_length=75, blank=False, null=False
