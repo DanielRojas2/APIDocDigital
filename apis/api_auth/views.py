@@ -13,7 +13,8 @@ class LoginView(APIView):
             refresh = RefreshToken.for_user(user)
             context = {
                 'status': True,
-                'content': str(refresh.access_token)
+                'access_token': str(refresh.access_token),
+                'refresh_token': str(refresh),
             }
         else:
             context = {
