@@ -4,7 +4,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..models.ModeloImportador import ModeloImportador
 from ..serializers.ImportadorSerializer import ImportadorSerializer
 
-class ImportadorView(viewsets.ModelViewSet):
+class ImportadorView(viewsets.ReadOnlyModelViewSet):
     queryset = ModeloImportador.objects.all()
     serializer_class = ImportadorSerializer
     authentication_classes = [JWTAuthentication]

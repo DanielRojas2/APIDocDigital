@@ -4,7 +4,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..models.ModeloAduanaDespacho import ModeloAduanaDespacho
 from ..serializers.AduanaDespachoSerializer import AduanaDespachoSerializer
 
-class AduanaDespachoView(viewsets.ModelViewSet):
+class AduanaDespachoView(viewsets.ReadOnlyModelViewSet):
     queryset = ModeloAduanaDespacho.objects.all()
     serializer_class = AduanaDespachoSerializer
     authentication_classes = [JWTAuthentication]

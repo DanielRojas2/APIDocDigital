@@ -4,7 +4,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..models.ModeloPersonalAgencia import ModeloPersonalAgencia
 from ..serializers.PersonalAgenciaSerializer import PersonalAgenciaSerializer
 
-class PersonalAgenciaView(viewsets.ModelViewSet):
+class PersonalAgenciaView(viewsets.ReadOnlyModelViewSet):
     queryset = ModeloPersonalAgencia.objects.all()
     serializer_class = PersonalAgenciaSerializer
     authentication_classes = [JWTAuthentication]
