@@ -4,7 +4,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..models.ModeloTipoArchivo import ModeloTipoArchivo
 from ..serializers.TipoArchivoSerializer import TipoArchivoSerializer
 
-class TipoArchivoView(viewsets.ReadOnlyModelViewSet):
+class TipoArchivoView(viewsets.ModelViewSet):
     queryset = ModeloTipoArchivo.objects.all()
     serializer_class = TipoArchivoSerializer
     authentication_classes = [JWTAuthentication]
