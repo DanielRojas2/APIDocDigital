@@ -23,4 +23,4 @@ class ModeloTipoArchivoCarpeta(models.Model):
         ]
     
     def __str__(self):
-        return f"{self.carpeta} - {', '.join(str(tipo) for tipo in self.tipo_archivo.all())}"
+        return ', '.join(str(tipo) for tipo in self.tipo_archivo.all())
