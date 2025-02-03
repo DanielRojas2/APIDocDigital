@@ -3,6 +3,7 @@ import shutil
 import tempfile
 import zipfile
 from django.http import FileResponse
+from django.urls import reverse
 from django.conf import settings
 from rest_framework import status
 from rest_framework import viewsets
@@ -38,14 +39,13 @@ class DetalleCarpetaView(viewsets.ReadOnlyModelViewSet):
         'tipoarchivo_carpeta_set__documento_soporte'
     )
     serializer_class = CarpetaDetalleSerializer
-    #authentication_classes = [JWTAuthentication]
-    #permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
     @action(detail=True, methods=['get'], url_path='descargar-zip')
     def descargar_zip(self, request, pk=None):
         carpeta = self.get_object()
         codigo_interno = carpeta.codigo_interno
-        nro_dim = carpeta.nro_dim
         temp_dir = tempfile.mkdtemp()
         carpeta_archivos_path = os.path.join(temp_dir, codigo_interno)
         os.makedirs(carpeta_archivos_path, exist_ok=True)
@@ -78,8 +78,8 @@ class DetalleCarpetaView(viewsets.ReadOnlyModelViewSet):
         )
         self._generar_pdf_detalle(
             detalles_pdf_path,
-            codigo_interno,
-            nro_dim, archivos
+            carpeta,
+            archivos
         )
 
         zip_path = os.path.join(tempfile.gettempdir(), f"{codigo_interno}.zip")
@@ -99,20 +99,65 @@ class DetalleCarpetaView(viewsets.ReadOnlyModelViewSet):
         )
         return response
 
-    def _generar_pdf_detalle(self, pdf_path, codigo_interno, nro_dim, archivos):
-        """Generar PDF con los detalles de la carpeta."""
+    def _generar_pdf_detalle(self, pdf_path, carpeta_obj, archivos):
         doc = SimpleDocTemplate(pdf_path, pagesize=landscape(letter))
         elements = []
         styles = getSampleStyleSheet()
+
+        serializer = ReporteCarpetaSerializer(carpeta_obj)
+        data = serializer.data
 
         elements.append(Paragraph("<b>Detalle de Carpeta</b>", styles["Title"]))
         elements.append(Spacer(1, 12))
 
         general_data = [
-            [Paragraph(f"<b>Código Interno:</b> {codigo_interno}", styles["Normal"]),
-            Paragraph(f"<b>Nro DIM:</b> {nro_dim}", styles["Normal"])]
+            [
+                Paragraph(
+                    f"<b>Código Interno:</b> {data['codigo_interno']}",
+                    styles["Normal"]
+                ),
+                Paragraph(
+                    f"<b>Nro DIM:</b> {data['nro_dim']}",
+                    styles["Normal"]
+                )
+            ],
+            [
+                Paragraph(
+                    f"<b>Aduana Despacho:</b> {
+                        data['aduana_despacho']['aduana_despacho']
+                    }",
+                    styles["Normal"]
+                ),
+                Paragraph(
+                    f"<b>Canal:</b> {data['canal']['tipo_canal']}",
+                    styles["Normal"]
+                ),
+            ],
+            [
+                Paragraph(
+                    f"<b>Modalidad Despacho:</b> {
+                        data['modalidad_despacho']['tipo_despacho']
+                    }",
+                    styles["Normal"]
+                ),
+                Paragraph(
+                    f"<b>Clasificación Carpeta:</b> {
+                        data['clasificacion_carpeta']['clasificacion_carpeta']
+                    }",
+                    styles["Normal"]
+                )
+            ],
+            [
+                Paragraph(
+                    f"<b>Importador:</b> {data['importador']['nombre_importador']}", styles["Normal"]
+                ),
+                Paragraph(
+                    f"<b>Mercadería:</b> {data['mercaderia']['nombre_mercaderia']}", styles["Normal"]
+                )
+            ]
         ]
-        general_table = Table(general_data, colWidths=[4.5 * inch, 4.5 * inch])
+        
+        general_table = Table(general_data, colWidths=[4.5 * inch, 4.5 * inch, inch])
         general_table.setStyle(TableStyle([
             ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
             ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),
@@ -122,6 +167,7 @@ class DetalleCarpetaView(viewsets.ReadOnlyModelViewSet):
         elements.append(Spacer(1, 12))
 
         def truncar_texto(texto, max_len=40):
+            """Función para truncar texto si es demasiado largo."""
             return texto if len(texto) <= max_len else texto[:max_len] + '...'
 
         data = [
