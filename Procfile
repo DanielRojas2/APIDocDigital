@@ -1,0 +1,1 @@
+web: python manage.py collectstatic && gunicorn rest_docDigital.wsgi

@@ -5,3 +5,6 @@ psycopg2==2.9.10
 django-cors-headers==4.6.0
 drf-yasg==1.21.8
 djangorestframework-simplejwt==5.4.0
+gunicorn
+whitenoise
+dj-database-url
