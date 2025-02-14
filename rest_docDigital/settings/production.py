@@ -13,7 +13,7 @@ DEBUG = os.getenv('DEBUG')=='True'
 
 ALLOWED_HOSTS = ['localhost', 'apidocdigital-production.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['http://*', 'https://apidocdigital-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['http://*', 'https://apidocdigital-production.up.railway.app']
 
 
 # Database
