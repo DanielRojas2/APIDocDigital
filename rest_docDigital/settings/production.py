@@ -11,9 +11,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')=='True'
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'https://apidocdigital-production.up.railway.app/']
 
-CSRF_TRUSTED_ORIGINS = ['http://']
+CSRF_TRUSTED_ORIGINS = ['https://apidocdigital-production.up.railway.app/']
 
 
 # Database
